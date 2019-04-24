@@ -1,0 +1,1 @@
+cat yolo* > ../yolov2-tiny-voc_352_288_final.weights
