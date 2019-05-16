@@ -635,7 +635,8 @@ dsrcTensorDesc	include/darknet.h	/^    cudnnTensorDescriptor_t dsrcTensorDesc, d
 dstTensorDesc	include/darknet.h	/^    cudnnTensorDescriptor_t srcTensorDesc, dstTensorDesc;$/;"	m	struct:layer
 dump_featuremap	src/network.c	/^void dump_featuremap(int layerNo, layer l){$/;"	f
 dump_featuremap_internal	src/convolutional_layer.c	/^void dump_featuremap_internal(layer l){$/;"	f
-dump_image_hex	examples/detector.c	/^void dump_image_hex(image sized){$/;"	f
+dump_image_CHW	examples/detector.c	/^void dump_image_CHW(image sized, char *filename){$/;"	f
+dump_maxpool	src/maxpool_layer.c	/^void dump_maxpool(maxpool_layer l){$/;"	f
 dunion	src/box.c	/^dbox dunion(box a, box b)$/;"	f
 dw	src/box.h	/^    float dx, dy, dw, dh;$/;"	m	struct:__anon1
 dweightDesc	include/darknet.h	/^    cudnnFilterDescriptor_t dweightDesc;$/;"	m	struct:layer
@@ -1207,6 +1208,7 @@ network_predict_data_multi	src/network.c	/^matrix network_predict_data_multi(net
 network_predict_image	src/network.c	/^float *network_predict_image(network *net, image im)$/;"	f
 network_predict_rotations	examples/go.c	/^float *network_predict_rotations(network *net, float *next)$/;"	f
 network_width	src/network.c	/^int network_width(network *net){return net->w;}$/;"	f
+new_scale_bias	src/batchnorm_layer.c	/^void new_scale_bias(float * output, float *scales, float *means, float *variances, float *biases, int channels){$/;"	f
 next	include/darknet.h	/^    struct node *next;$/;"	m	struct:node	typeref:struct:node::node
 nh	include/darknet.h	/^    int nh;$/;"	m	struct:load_args
 nind	examples/go.c	/^static const int nind = 10;$/;"	v	file:

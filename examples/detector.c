@@ -561,7 +561,7 @@ void validate_detector_recall(char *cfgfile, char *weightfile)
 
 void dump_image_CHW(image sized, char *filename){
     int x,y,c;
-    static int first=1;
+    static int first=2;
     if(first==0) return;
     FILE *fp=fopen(filename,"w");
     for(c=0;c<sized.c;c++){
@@ -574,7 +574,7 @@ void dump_image_CHW(image sized, char *filename){
             }
         }
     }
-    first=0;
+    first--;
     fclose(fp);
 }
 
