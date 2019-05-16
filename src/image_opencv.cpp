@@ -40,10 +40,13 @@ image ipl_to_image(IplImage* src)
         fprintf(fp,"%02x\n",data[k]);
     }
     fclose(fp);
+    // Image Bytes order at transpose HWC to CHW
+    // OpenCV IplImage: HWC
+    // darknet image  : CHW
     for(i = 0; i < h; ++i){
         for(k= 0; k < c; ++k){
             for(j = 0; j < w; ++j){
-                im.data[k*w*h + i*w + j] = data[i*step + j*c + k]/255.;
+                im.data[k*w*h + i*w + j] = data[i*step + j*c + k]/255.; // HWC to CHW
             }
         }
     }
