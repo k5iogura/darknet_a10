@@ -75,6 +75,17 @@ void resize_region_layer(layer *l, int w, int h)
 
 box get_region_box(float *x, float *biases, int n, int index, int i, int j, int w, int h, int stride)
 {
+    //Byte order of predictions is,
+    // x..x, y..y, w..w, h..h
+    //                         Not! xywh..xywh
+    //because
+    // x: predictions
+    // biases: anchors
+    // n: num(==5)
+    // index: box_index of x
+    // i,j:
+    // w,h: grid width, height
+    // stride: w*h
     box b;
     b.x = (i + x[index + 0*stride]) / w;
     b.y = (j + x[index + 1*stride]) / h;
@@ -399,6 +410,9 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
             int obj_index  = entry_index(l, 0, n*l.w*l.h + i, l.coords);
             int box_index  = entry_index(l, 0, n*l.w*l.h + i, 0);
             int mask_index = entry_index(l, 0, n*l.w*l.h + i, 4);
+            //printf("start : obj:%d/box:%d/mask:%d\n",obj_index,box_index,mask_index);
+            //for (k=obj_index;k<obj_index+l.w*l.h;k++)
+                //if(predictions[obj_index]>0.0) printf("predictions[%d] = %f\n",obj_index,predictions[obj_index]);
             float scale = l.background ? 1 : predictions[obj_index];
             dets[index].bbox = get_region_box(predictions, l.biases, n, box_index, col, row, l.w, l.h, l.w*l.h);
             dets[index].objectness = scale > thresh ? scale : 0;

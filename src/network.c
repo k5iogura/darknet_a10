@@ -581,6 +581,12 @@ void fill_network_boxes(network *net, int w, int h, float thresh, float hier, in
             dets += count;
         }
         if(l.type == REGION){
+            {
+                int k;
+                FILE *fp=fopen("region_layer.txt","w");
+                for (k=0;k<l.outputs;k++) fprintf(fp,"%f\n",l.output[k]);
+                fclose(fp);
+            }
             get_region_detections(l, w, h, net->w, net->h, thresh, map, hier, relative, dets);
             dets += l.w*l.h*l.n;
         }
